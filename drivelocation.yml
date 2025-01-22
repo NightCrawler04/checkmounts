@@ -4,12 +4,10 @@
   gather_facts: no
   tasks:
     - name: Gather disk paths
-      command: lsblk -o NAME,TYPE -d
+      command: ll /dev/disk/by-path
       register: disk_info
       changed_when: false
 
-    - name: Extract drive paths
+    - name: Show disk paths
       debug:
-        msg: "/dev/{{ item }}"
-      with_items: >
-        {{ disk_info.stdout_lines | map('split') | selectattr(1, 'eq', 'disk') | map('first') | list }}
+        var: disk_info.stdout_lines
