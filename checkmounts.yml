@@ -1,6 +1,6 @@
 ---
 - name: Check disks available on Linux servers
-  hosts: all
+  hosts: dr-servers
   gather_facts: yes
   tasks:
     - name: Gather disk information using lsblk
@@ -8,6 +8,7 @@
       register: disk_info
       changed_when: false
 
-    - name: Show the gathered disk information
+    - name: Show simplified disk information
       debug:
-        var: disk_info.stdout_lines
+        msg: "{{ item }}"
+      with_items: "{{ disk_info.stdout_lines }}"
