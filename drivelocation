@@ -1,0 +1,15 @@
+---
+- name: Display drive paths on Linux servers
+  hosts: dr-servers
+  gather_facts: no
+  tasks:
+    - name: Gather disk paths
+      command: lsblk -o NAME,TYPE -d
+      register: disk_info
+      changed_when: false
+
+    - name: Extract drive paths
+      debug:
+        msg: "/dev/{{ item }}"
+      with_items: >
+        {{ disk_info.stdout_lines | map('split') | selectattr(1, 'eq', 'disk') | map('first') | list }}
