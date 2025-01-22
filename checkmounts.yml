@@ -8,6 +8,6 @@
       register: disk_info
       changed_when: false
 
-    - name: Show the gathered disk information
-      debug:
-        var: disk_info.stdout_lines
+   # - name: Show the gathered disk information
+   #   debug:
+   #     var: disk_info.stdout_lines
