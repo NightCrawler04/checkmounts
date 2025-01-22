@@ -1,6 +1,6 @@
 ---
 - name: Check disks available on Linux servers
-  hosts: all
+  hosts: dr-servers
   gather_facts: yes
   tasks:
     - name: Gather disk information using lsblk
