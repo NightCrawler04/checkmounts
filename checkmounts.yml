@@ -1,0 +1,13 @@
+---
+- name: Check disks available on Linux servers
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Gather disk information using lsblk
+      command: lsblk -f
+      register: disk_info
+      changed_when: false
+
+    - name: Show the gathered disk information
+      debug:
+        var: disk_info.stdout_lines
