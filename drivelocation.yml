@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Gather disk paths
-      command: ll /dev/disk/by-path
+      command: ls -l /dev/disk/by-path
       register: disk_info
       changed_when: false
 
